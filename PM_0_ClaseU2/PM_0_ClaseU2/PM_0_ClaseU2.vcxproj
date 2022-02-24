@@ -53,6 +53,11 @@
       <FileType>Document</FileType>
     </MASM>
   </ItemGroup>
+  <ItemGroup>
+    <MASM Include="26_PerimetroRectangulo_.asm">
+      <FileType>Document</FileType>
+    </MASM>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -128,7 +133,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EntryPointSymbol>main25</EntryPointSymbol>
+      <EntryPointSymbol>main26</EntryPointSymbol>
       <ImportLibrary>c:\Irvine</ImportLibrary>
     </Link>
     <MASM>

@@ -27,6 +27,7 @@
     <MASM Include="23_CiclosAnidados_.asm" />
     <MASM Include="24_ChecarNesPrimo_.asm" />
     <MASM Include="25_ChecarPrimosEntreAyB_.asm" />
+    <MASM Include="26_PerimetroRectangulo_.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="C:\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
