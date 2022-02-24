@@ -1,0 +1,14 @@
+Tareas Unidad 1.
+
+1. ¿Qué es el lenguaje ensamblador?
+2. Mnemotecnico o nemotecnico
+3. ¿Qué es un Microprocesador?
+4. Bus y sus Tipos
+5. Registros y sus Tipos
+6. Modos de Direccionamiento más comunes
+7. ¿Comó aplicar complemento a 16? (Fecha de entrega 24 de Enero)
+8. Diferencias entre ensamblador y macroensamblador
+9. ¿Qué es un etiqueta en macroensamblador?
+10. Trabajos en donde se solicite conocimiento en ensamblador
+
+

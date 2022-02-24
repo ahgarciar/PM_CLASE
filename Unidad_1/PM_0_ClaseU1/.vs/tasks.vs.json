@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "tarea-PM_0_ClaseU1",
+      "appliesTo": "PM_0_ClaseU1/",
+      "type": "launch"
+    }
+  ]
+}
