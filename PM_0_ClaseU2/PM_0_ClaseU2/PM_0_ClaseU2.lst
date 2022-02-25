@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    02/23/22 19:55:39
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    02/24/22 19:55:57
 Introduccio						     Page 1 - 1
 
 
@@ -36,83 +36,44 @@ Microsoft (R) Macro Assembler Version 14.30.30709.0	    02/23/22 19:55:39
 
  00000000			.data  ;variables
 				; Área de Declaración de Variables
- 00000000 20 49 6E 67 72	tP1_msj_26 db " Ingresa el valor del base: ", 0
-	   65 73 61 20 65
-	   6C 20 76 61 6C
-	   6F 72 20 64 65
-	   6C 20 62 61 73
-	   65 3A 20 00
- 0000001D 20 49 6E 67 72	tP2_msj_26 db " Ingresa el valor del altura: ", 0
-	   65 73 61 20 65
-	   6C 20 76 61 6C
-	   6F 72 20 64 65
-	   6C 20 61 6C 74
-	   75 72 61 3A 20
-	   00
 
- 0000003C 20 45 6C 20 70	tR1_msj_26 db " El perimetro es: ", 0
-	   65 72 69 6D 65
-	   74 72 6F 20 65
-	   73 3A 20 00
+ 00000000 49 6E 67 72 65	tp1_msj_28 db "Ingrese el numero: ", 0 
+	   73 65 20 65 6C
+	   20 6E 75 6D 65
+	   72 6F 3A 20 00
 
-
-				;Sintaxis: nombreVariable tipoDato(byte, word, >dword<) valor
-				;cuando no se tenga un valor de inicio se debe poner el signo de interrogacion (?)
-
-
- 0000004F 00000000		base_26 dword ?
- 00000053 00000000		altura_26 dword ?
- 00000057 00000000		resultado_26 dword 0
-
+ 00000014 45 6C 20 76 61	tr1_msj_28 db "El valor absoluto es: ", 0 
+	   6C 6F 72 20 61
+	   62 73 6F 6C 75
+	   74 6F 20 65 73
+	   3A 20 00
 
  00000000			.code
- 00000000			main26 PROC
+ 00000000			main28 PROC
 				; Lógica del Programa
 
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 00000000  BA 00000000 R	mov edx, offset tP1_msj_26
- 00000005  E8 00000000 E	call writeString
- 0000000A  E8 00000000 E	call readint ; eax
+ 00000000  BA 00000000 R	mov edx, offset tp1_msj_28
+ 00000005  E8 00000000 E	call writestring
+ 0000000A  E8 00000000 E	call readint
 
- 0000000F  A3 0000004F R	mov base_26, eax   ; base_26 = eax
+ 0000000F  83 F8 00		cmp eax, 0 
+ 00000012  7F 07		jg continuar
+					; camino del no
+ 00000014  BA FFFFFFFF			mov edx, -1
+ 00000019  F7 E2			mul edx
 
- 00000014  BA 0000001D R	mov edx, offset tP2_msj_26
- 00000019  E8 00000000 E	call writeString
- 0000001E  E8 00000000 E	call readint ; eax
+ 0000001B			continuar:
 
- 00000023  A3 00000053 R	mov altura_26, eax   ; altura_26 = eax
+ 0000001B  BA 00000014 R	mov edx, offset	tr1_msj_28
+ 00000020  E8 00000000 E	call writestring
+ 00000025  E8 00000000 E	call writedec
 
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-					;multiplicacion de base * 2
- 00000028  B8 00000002			mov eax, 2
- 0000002D  F7 25 0000004F R		mul  base_26    ; eax * base_26 => 2 * base_26  ; resultado en eax
-					
- 00000033  01 05 00000057 R		add resultado_26, eax   ;
-
-					;multiplicacion de altura * 2
- 00000039  B8 00000002			mov eax, 2
- 0000003E  F7 25 00000053 R		mul altura_26 ; eax * altua_26 => 2 * altura_26 ; resultado en eax
-
- 00000044  01 05 00000057 R		add resultado_26, eax   ;
-
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 0000004A  E8 00000000 E		call crlf
-
- 0000004F  BA 0000003C R		mov edx, offset tR1_msj_26
- 00000054  E8 00000000 E		call writestring
-
- 00000059  A1 00000057 R		mov eax, resultado_26
- 0000005E  E8 00000000 E		call writedec
-					
 
 				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 				exit
- 0000006A			main26 ENDP
-
-
-				END main26
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    02/23/22 19:55:39
+ 00000031			main28 ENDP
+				END main28
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    02/24/22 19:55:57
 Introduccio						     Symbols 2 - 1
 
 
@@ -206,8 +167,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000005B Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000006A Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000002B Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000031 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -314,7 +275,8 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main26 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000006A Public STDCALL
+main28 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000031 Public STDCALL
+  continuar  . . . . . . . . . .	L Near	 0000001B _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -533,8 +495,6 @@ VK_UP  . . . . . . . . . . . . .	Number	 00000026h
 WINDOW_BUFFER_SIZE_EVENT . . . .	Number	 00000004h   
 WriteConsoleOutputCharacter  . .	Text   	 WriteConsoleOutputCharacterA
 WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
-altura_26  . . . . . . . . . . .	DWord	 00000053 _DATA	
-base_26  . . . . . . . . . . . .	DWord	 0000004F _DATA	
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
@@ -550,10 +510,8 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-resultado_26 . . . . . . . . . .	DWord	 00000057 _DATA	
-tP1_msj_26 . . . . . . . . . . .	Byte	 00000000 _DATA	
-tP2_msj_26 . . . . . . . . . . .	Byte	 0000001D _DATA	
-tR1_msj_26 . . . . . . . . . . .	Byte	 0000003C _DATA	
+tp1_msj_28 . . . . . . . . . . .	Byte	 00000000 _DATA	
+tr1_msj_28 . . . . . . . . . . .	Byte	 00000014 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
