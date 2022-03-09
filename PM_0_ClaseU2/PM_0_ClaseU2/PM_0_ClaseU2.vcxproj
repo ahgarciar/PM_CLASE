@@ -38,7 +38,10 @@
     <MASM Include="25_ChecarPrimosEntreAyB_.asm" />
     <MASM Include="27_AreaTriangulo_.asm" />
     <MASM Include="28_valorAbsoluto_.asm" />
+    <MASM Include="29_CiclosAnidados_Pila_.asm" />
     <MASM Include="2_MOV_parte2_.asm" />
+    <MASM Include="30_EjemploBasicoConLaPila_.asm" />
+    <MASM Include="31_EjemploBasico2_ConPila_.asm" />
     <MASM Include="3_ADD_.asm" />
     <MASM Include="4_SUB_.asm" />
     <MASM Include="5_MUL_.asm" />
@@ -46,6 +49,8 @@
     <MASM Include="7_EscrituraEnPantallaDeNumeros_.asm" />
     <MASM Include="8_EscrituraTextoEnPantalla_.asm" />
     <MASM Include="9_LeesNumerosDePantalla_.asm" />
+    <MASM Include="Ej3_Y_hasta_0_.asm" />
+    <MASM Include="Ej4_ImprimirNota.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="C:\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
@@ -135,7 +140,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EntryPointSymbol>main28</EntryPointSymbol>
+      <EntryPointSymbol>main31</EntryPointSymbol>
       <ImportLibrary>c:\Irvine</ImportLibrary>
     </Link>
     <MASM>

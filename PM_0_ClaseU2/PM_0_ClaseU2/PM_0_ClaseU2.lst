@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    02/24/22 19:55:57
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/08/22 19:23:47
 Introduccio						     Page 1 - 1
 
 
@@ -37,43 +37,34 @@ Microsoft (R) Macro Assembler Version 14.30.30709.0	    02/24/22 19:55:57
  00000000			.data  ;variables
 				; Área de Declaración de Variables
 
- 00000000 49 6E 67 72 65	tp1_msj_28 db "Ingrese el numero: ", 0 
-	   73 65 20 65 6C
-	   20 6E 75 6D 65
-	   72 6F 3A 20 00
-
- 00000014 45 6C 20 76 61	tr1_msj_28 db "El valor absoluto es: ", 0 
-	   6C 6F 72 20 61
-	   62 73 6F 6C 75
-	   74 6F 20 65 73
-	   3A 20 00
-
  00000000			.code
- 00000000			main28 PROC
+ 00000000			main30 PROC
 				; Lógica del Programa
 
- 00000000  BA 00000000 R	mov edx, offset tp1_msj_28
- 00000005  E8 00000000 E	call writestring
- 0000000A  E8 00000000 E	call readint
+ 00000000  B8 00000014			mov eax, 20
+ 00000005  E8 00000000 E		call writedec
+ 0000000A  E8 00000000 E		call crlf
+ 0000000F  50				push eax 
+					
+ 00000010  E8 00000000 E		call writedec
+ 00000015  E8 00000000 E		call crlf
 
- 0000000F  83 F8 00		cmp eax, 0 
- 00000012  7F 07		jg continuar
-					; camino del no
- 00000014  BA FFFFFFFF			mov edx, -1
- 00000019  F7 E2			mul edx
+ 0000001A  BB 00000005			mov ebx, 5
+ 0000001F  8B C3			mov eax, ebx
+ 00000021  E8 00000000 E		call writedec
+ 00000026  E8 00000000 E		call crlf
 
- 0000001B			continuar:
+ 0000002B  5B				pop ebx
 
- 0000001B  BA 00000014 R	mov edx, offset	tr1_msj_28
- 00000020  E8 00000000 E	call writestring
- 00000025  E8 00000000 E	call writedec
-
+ 0000002C  8B C3			mov eax, ebx
+ 0000002E  E8 00000000 E		call writedec
+ 00000033  E8 00000000 E		call crlf
 
 				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 				exit
- 00000031			main28 ENDP
-				END main28
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    02/24/22 19:55:57
+ 0000003F			main30 ENDP
+				END main30
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/08/22 19:23:47
 Introduccio						     Symbols 2 - 1
 
 
@@ -167,8 +158,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000002B Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000031 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000003F Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -275,8 +266,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main28 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000031 Public STDCALL
-  continuar  . . . . . . . . . .	L Near	 0000001B _TEXT	
+main30 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000003F Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -510,8 +500,6 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
-tp1_msj_28 . . . . . . . . . . .	Byte	 00000000 _DATA	
-tr1_msj_28 . . . . . . . . . . .	Byte	 00000014 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   

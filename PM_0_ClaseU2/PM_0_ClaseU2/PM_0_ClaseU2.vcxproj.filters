@@ -30,6 +30,11 @@
     <MASM Include="26_PerimetroRectangulo_.asm" />
     <MASM Include="27_AreaTriangulo_.asm" />
     <MASM Include="28_valorAbsoluto_.asm" />
+    <MASM Include="Ej3_Y_hasta_0_.asm" />
+    <MASM Include="Ej4_ImprimirNota.asm" />
+    <MASM Include="29_CiclosAnidados_Pila_.asm" />
+    <MASM Include="30_EjemploBasicoConLaPila_.asm" />
+    <MASM Include="31_EjemploBasico2_ConPila_.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="C:\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
