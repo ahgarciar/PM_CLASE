@@ -35,6 +35,7 @@
     <MASM Include="29_CiclosAnidados_Pila_.asm" />
     <MASM Include="30_EjemploBasicoConLaPila_.asm" />
     <MASM Include="31_EjemploBasico2_ConPila_.asm" />
+    <MASM Include="32_ImpresionTablasMultiplicas_.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="C:\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />

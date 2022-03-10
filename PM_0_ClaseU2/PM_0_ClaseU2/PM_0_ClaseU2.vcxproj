@@ -42,6 +42,7 @@
     <MASM Include="2_MOV_parte2_.asm" />
     <MASM Include="30_EjemploBasicoConLaPila_.asm" />
     <MASM Include="31_EjemploBasico2_ConPila_.asm" />
+    <MASM Include="32_ImpresionTablasMultiplicas_.asm" />
     <MASM Include="3_ADD_.asm" />
     <MASM Include="4_SUB_.asm" />
     <MASM Include="5_MUL_.asm" />
@@ -140,7 +141,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EntryPointSymbol>main31</EntryPointSymbol>
+      <EntryPointSymbol>main32</EntryPointSymbol>
       <ImportLibrary>c:\Irvine</ImportLibrary>
     </Link>
     <MASM>

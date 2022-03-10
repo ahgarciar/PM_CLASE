@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/08/22 19:23:47
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/09/22 19:51:00
 Introduccio						     Page 1 - 1
 
 
@@ -34,37 +34,61 @@ Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/08/22 19:23:47
 			      C .LIST
 			      C 
 
- 00000000			.data  ;variables
+ 00000000			.data
 				; Área de Declaración de Variables
+ 00000000 20 58 20 00		tP1_msj_32 db " X ",0
+ 00000004 20 3F 20 3D 20	tP2_msj_32 db " ? = ",0
+	   00
 
  00000000			.code
- 00000000			main30 PROC
+ 00000000			main32 PROC
 				; Lógica del Programa
 
- 00000000  B8 00000014			mov eax, 20
- 00000005  E8 00000000 E		call writedec
- 0000000A  E8 00000000 E		call crlf
- 0000000F  50				push eax 
-					
- 00000010  E8 00000000 E		call writedec
- 00000015  E8 00000000 E		call crlf
+				;aqui hay que agregar un mensaje 
 
- 0000001A  BB 00000005			mov ebx, 5
- 0000001F  8B C3			mov eax, ebx
- 00000021  E8 00000000 E		call writedec
- 00000026  E8 00000000 E		call crlf
 
- 0000002B  5B				pop ebx
 
- 0000002C  8B C3			mov eax, ebx
- 0000002E  E8 00000000 E		call writedec
- 00000033  E8 00000000 E		call crlf
+ 00000000  BB 00000001		mov ebx, 1 ; la impresion de las tablas comienza en 1 
+
+ 00000005			ciclo1:
+
+ 00000005  B9 00000001			mov ecx, 1 ; contador de la tabla
+
+ 0000000A				ciclo2:
+ 0000000A  8B C3				mov eax, ebx  ; para regresar el valor de tabla
+ 0000000C  E8 00000000 E			call writedec 
+
+ 00000011  BA 00000000 R			mov edx, offset tP1_msj_32
+ 00000016  E8 00000000 E			call writestring
+
+ 0000001B  8B C1				mov eax, ecx
+ 0000001D  E8 00000000 E			call writedec
+
+ 00000022  BA 00000004 R			mov edx, offset tP2_msj_32
+ 00000027  E8 00000000 E			call writestring
+
+						;resuelve
+ 0000002C  F7 E3				mul ebx
+ 0000002E  E8 00000000 E			call writedec
+
+ 00000033  E8 00000000 E			call crlf
+
+ 00000038  41					inc ecx
+ 00000039  83 F9 0A				cmp ecx, 10
+ 0000003C  7E CC				jle ciclo2
+
+ 0000003E  E8 00000000 E		call crlf
+
+ 00000043  43				inc ebx
+ 00000044  83 FB 0A			cmp ebx, 10
+ 00000047  7E BC			jle ciclo1
 
 				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 				exit
- 0000003F			main30 ENDP
-				END main30
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/08/22 19:23:47
+ 00000050			main32 ENDP
+
+				END main32
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/09/22 19:51:00
 Introduccio						     Symbols 2 - 1
 
 
@@ -158,8 +182,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000003F Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000000A Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000050 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -266,7 +290,9 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main30 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000003F Public STDCALL
+main32 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000050 Public STDCALL
+  ciclo1 . . . . . . . . . . . .	L Near	 00000005 _TEXT	
+  ciclo2 . . . . . . . . . . . .	L Near	 0000000A _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -500,6 +526,8 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
+tP1_msj_32 . . . . . . . . . . .	Byte	 00000000 _DATA	
+tP2_msj_32 . . . . . . . . . . .	Byte	 00000004 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
