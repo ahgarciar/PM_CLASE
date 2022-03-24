@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <MASM Include="0_Plantilla_.asm" />
+    <MASM Include="1_Proc_WaitMsg.asm" />
+    <MASM Include="2_Prog_ReadWriteChar_.asm" />
+    <MASM Include="3_Prog_RandomaV1_.asm" />
+    <MASM Include="4_Prog_RandomV2_.asm" />
+    <MASM Include="5_Prog_RandomV3_.asm" />
+    <MASM Include="6_ReadString_.asm" />
+    <MASM Include="7_MsgBox_.asm" />
+    <MASM Include="8_MsgBoxAsk_.asm" />
+    <MASM Include="9_Delay_Clscr_.asm" />
+    <MASM Include="10_IntroMacros_.asm" />
+    <MASM Include="11_IntroMacrosV2_.asm" />
+    <MASM Include="12_IntroMacrosV3_.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="C:\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LibreriaMacros.inc" />
+  </ItemGroup>
+</Project>
