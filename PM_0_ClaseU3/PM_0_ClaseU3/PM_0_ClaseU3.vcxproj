@@ -23,6 +23,9 @@
     <MASM Include="10_IntroMacros_.asm" />
     <MASM Include="11_IntroMacrosV2_.asm" />
     <MASM Include="12_IntroMacrosV3_.asm" />
+    <MASM Include="13_Macros_V1_AreaRectangulo_.asm" />
+    <MASM Include="14_Macros_V2_AreaRectangulo_V2_.asm" />
+    <MASM Include="15_Macros_V3_AreaRectangulo.asm" />
     <MASM Include="2_Prog_ReadWriteChar_.asm" />
     <MASM Include="3_Prog_RandomaV1_.asm" />
     <MASM Include="4_Prog_RandomV2_.asm" />
@@ -118,7 +121,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EntryPointSymbol>main12</EntryPointSymbol>
+      <EntryPointSymbol>main15</EntryPointSymbol>
       <ImportLibrary>C:\Irvine</ImportLibrary>
     </Link>
     <MASM>

@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/23/22 19:48:32
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/29/22 19:47:13
 Introduccio						     Page 1 - 1
 
 
@@ -34,28 +34,182 @@ Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/23/22 19:48:32
 			      C .LIST
 			      C 
 
+				INCLUDE LibreriaMacros.inc
+			      C PrintLn MACRO texto
+			      C 	LOCAL msj
+			      C 	.data
+			      C 	; Área de Declaración de Variables
+			      C 		;msj db "texto",0
+			      C 		msj db texto,0
+			      C 
+			      C 	.code
+			      C 	; Lógica del Programa
+			      C 	push edx
+			      C 	mov edx, offset msj
+			      C 	call writestring
+			      C 	call crlf
+			      C 	pop edx
+			      C 
+			      C ENDM
+			      C 
+			      C ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+			      C ;;;; MACRO VERSION 1
+			      C 
+			      C calc_area_rectangulo_v1 MACRO
+			      C 	.data
+			      C 	; Área de Declaración de Variables
+			      C 	
+			      C 	.code
+			      C 	; Lógica del Programa
+			      C 	; EAX = ALTURA
+			      C 	; EBX = BASE
+			      C 
+			      C 	MUL EBX  ; RESULTADO ESTARA EN EAX
+			      C 
+			      C 
+			      C ENDM
+			      C 
+			      C ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+			      C 
+			      C ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+			      C ;;;; MACRO VERSION 2
+			      C 
+			      C calc_area_rectangulo_v2 MACRO base, altura
+			      C 	.data
+			      C 	; Área de Declaración de Variables
+			      C 	
+			      C 	.code
+			      C 	; Lógica del Programa
+			      C 
+			      C 	push EBX
+			      C 	
+			      C 	mov ebx, base
+			      C 	mov eax, altura
+			      C 
+			      C 	; EAX = altura
+			      C 	; EBX = base 
+			      C 
+			      C 	MUL EBX  ; RESULTADO ESTARA EN EAX
+			      C 
+			      C 	pop ebx
+			      C 
+			      C 
+			      C ENDM
+			      C 
+			      C ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+			      C 
+			      C 
+			      C ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+			      C ;;;; MACRO VERSION 3
+			      C 
+			      C calc_area_rectangulo_v3 MACRO base, altura
+			      C 	.data
+			      C 	; Área de Declaración de Variables
+			      C 	b dword base
+			      C 
+			      C 	.code
+			      C 	; Lógica del Programa
+			      C 	
+			      C 	mov eax, altura
+			      C 
+			      C 	MUL b  ; RESULTADO ESTARA EN EAX
+			      C 
+			      C 
+			      C ENDM
+			      C 
+			      C ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+			      C 
+
+
  00000000			.data
 				; Área de Declaración de Variables
+ 00000000 0000000A		var1_15 dword 10
+
 
  00000000			.code
- 00000000			main1 PROC
+ 00000000			main15 PROC
 				; Lógica del Programa
 
- 00000000  B8 0000000A		mov eax, 10
- 00000005  E8 00000000 E	call writedec 
- 0000000A  E8 00000000 E	call crlf
+				Println "Ingresa la base: "
+ 00000004		     1		.data
+ 00000004 49 6E 67 72 65     1			??0000 db "Ingresa la base: ",0
+	   73 61 20 6C 61
+	   20 62 61 73 65
+	   3A 20 00
+ 00000000		     1		.code
+ 00000000  52		     1		push edx
+ 00000001  BA 00000004 R     1		mov edx, offset ??0000
+ 00000006  E8 00000000 E     1		call writestring
+ 0000000B  E8 00000000 E     1		call crlf
+ 00000010  5A		     1		pop edx
+ 00000011  E8 00000000 E	call readint
+ 00000016  8B D8		mov ebx, eax
 
- 0000000F  E8 00000000 E	call waitmsg
+				Println "Ingresa la altura: "
+ 00000016		     1		.data
+ 00000016 49 6E 67 72 65     1			??0001 db "Ingresa la altura: ",0
+	   73 61 20 6C 61
+	   20 61 6C 74 75
+	   72 61 3A 20 00
+ 00000018		     1		.code
+ 00000018  52		     1		push edx
+ 00000019  BA 00000016 R     1		mov edx, offset ??0001
+ 0000001E  E8 00000000 E     1		call writestring
+ 00000023  E8 00000000 E     1		call crlf
+ 00000028  5A		     1		pop edx
+ 00000029  E8 00000000 E	call readint
+
+				;;;;;;;;;;
+				;calc_area_rectangulo_v3 ebx, eax  ;NO SE PPUEDE
+
+				;
+				;calc_area_rectangulo_v3 var1_15, EAX
+
+				;
+				calc_area_rectangulo_v3 5, EAX
+ 0000002A		     1		.data
+ 0000002A 00000005	     1		b dword 5
+ 0000002E		     1		.code
+ 0000002E  8B C0	     1		mov eax, EAX
+ 00000030  F7 25 0000002A R  1		MUL b  ; RESULTADO ESTARA EN EAX
+
+				;;;;;;;;
+				Println "El area del rectangulo es: "
+ 0000002E		     1		.data
+ 0000002E 45 6C 20 61 72     1			??0002 db "El area del rectangulo es: ",0
+	   65 61 20 64 65
+	   6C 20 72 65 63
+	   74 61 6E 67 75
+	   6C 6F 20 65 73
+	   3A 20 00
+ 00000036		     1		.code
+ 00000036  52		     1		push edx
+ 00000037  BA 0000002E R     1		mov edx, offset ??0002
+ 0000003C  E8 00000000 E     1		call writestring
+ 00000041  E8 00000000 E     1		call crlf
+ 00000046  5A		     1		pop edx
+ 00000047  E8 00000000 E	call writedec
+
 
 				exit
 
- 0000001B			main1 ENDP
+ 00000053			main15 ENDP
 
-				END main1
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/23/22 19:48:32
+				END main15
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    03/29/22 19:47:13
 Introduccio						     Symbols 2 - 1
 
 
+
+
+Macros:
+
+                N a m e                 Type
+
+PrintLn  . . . . . . . . . . . .	Proc
+calc_area_rectangulo_v1  . . . .	Proc
+calc_area_rectangulo_v2  . . . .	Proc
+calc_area_rectangulo_v3  . . . .	Proc
 
 
 Structures and Unions:
@@ -146,8 +300,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001B Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000004A Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000053 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -254,7 +408,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main1  . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001B Public STDCALL
+main15 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000053 Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -264,6 +418,9 @@ Symbols:
 
                 N a m e                 Type     Value    Attr
 
+??0000 . . . . . . . . . . . . .	Byte	 00000004 _DATA	
+??0001 . . . . . . . . . . . . .	Byte	 00000016 _DATA	
+??0002 . . . . . . . . . . . . .	Byte	 0000002E _DATA	
 @CodeSize  . . . . . . . . . . .	Number	 00000000h   
 @DataSize  . . . . . . . . . . .	Number	 00000000h   
 @Interface . . . . . . . . . . .	Number	 00000003h   
@@ -476,6 +633,7 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
+b  . . . . . . . . . . . . . . .	DWord	 0000002A _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
@@ -488,6 +646,7 @@ lightMagenta . . . . . . . . . .	Number	 0000000Dh
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
 red  . . . . . . . . . . . . . .	Number	 00000004h   
+var1_15  . . . . . . . . . . . .	DWord	 00000000 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
 yellow . . . . . . . . . . . . .	Number	 0000000Eh   
