@@ -10,5 +10,7 @@
     <MASM Include="P_3_CMPSB_.asm" />
     <MASM Include="P_4_SCASB_.asm" />
     <MASM Include="P_5_SCASB_REPNZ_.ASM" />
+    <MASM Include="P_6_STOSB_.asm" />
+    <MASM Include="P_7_LODSB_.asm" />
   </ItemGroup>
 </Project>

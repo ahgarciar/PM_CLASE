@@ -27,6 +27,8 @@
     <MASM Include="P_3_CMPSB_.asm" />
     <MASM Include="P_4_SCASB_.asm" />
     <MASM Include="P_5_SCASB_REPNZ_.ASM" />
+    <MASM Include="P_6_STOSB_.asm" />
+    <MASM Include="P_7_LODSB_.asm" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="C:\Irvine\Lib32\Irvine32_Library\Irvine32.obj" />
@@ -106,7 +108,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EntryPointSymbol>main_5</EntryPointSymbol>
+      <EntryPointSymbol>main_7</EntryPointSymbol>
       <ImportLibrary>c:\Irvine</ImportLibrary>
     </Link>
     <MASM>

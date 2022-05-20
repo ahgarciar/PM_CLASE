@@ -1,5 +1,5 @@
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    05/09/22 19:46:14
-P_5_SCASB_REPNZ_.ASM					     Page 1 - 1
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    05/11/22 19:54:48
+P_7_LODSB_.asm						     Page 1 - 1
 
 
 				INCLUDE Irvine32.inc
@@ -23,52 +23,42 @@ P_5_SCASB_REPNZ_.ASM					     Page 1 - 1
 
  00000000			.data
 				; Área de Declaración de Variables
- 00000000 47 41 52 55 43	cadena1_5 db "GARUCO",0
+ 00000000 47 41 52 55 43	cadena1_7 db "GARUCO",0
 	   4F 00
 
  00000000			.code
- 00000000			main_5 PROC
+ 00000000			main_7 PROC
 				; Lógica del Programa
 
- 00000000			REPITE:
+ 00000000  B8 00000000		mov eax, 0 ; limpiar el registro
 
-				;SCASB
-				;Explorar cadena: compara el acumulador (AL, AX o EAX) con el contenido de la
-				;memoria direccionada por EDI
+ 00000005  E8 00000000 E	call readint ; leer la posicion de la que se obtendra letra en la cadena
 
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 00000000  BF 00000000 R	mov edi, offset cadena1_5
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+				;LODSB
+				;Cargar acumulador desde cadena: carga la memoria direccionada por ESI al acumulador
 
- 00000005  B8 00000000		mov eax, 0
- 0000000A  E8 00000000 E	call readchar ; al
- 0000000F  E8 00000000 E	call writechar ; echo
+ 0000000A  BE 00000000 R	mov esi, offset cadena1_7 ; 
+ 0000000F  03 F0		add esi, eax  ; coloca a esi en la localidad de memoria deseada
+				;para obtener la letra de la posicion indicada por el usuario
 
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 00000014  B9 00000007		mov ecx, sizeof cadena1_5
+ 00000011  B8 00000000		mov eax, 0 ;limpia el registro
 
- 00000019  F2/ AE		REPNZ scasb
+ 00000016  AC			lodsb ;copia la letra de la posicion deseada de la cadena en al
 
- 0000001B  B8 00000007		mov eax, sizeof cadena1_5; auxiliar
+ 00000017  E8 00000000 E	call crlf
+ 0000001C  E8 00000000 E	call writechar
+ 00000021  E8 00000000 E	call crlf
 
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
- 00000020  2B C1		sub eax, ecx
 
- 00000022  E8 00000000 E	call writedec
-
- 00000027  E8 00000000 E	CALL CRLF
-				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
- 0000002C  EB D2		JMP REPITE
 
 				exit
 
- 00000035			main_5 ENDP
+ 0000002D			main_7 ENDP
 
-				END main_5
-Microsoft (R) Macro Assembler Version 14.30.30709.0	    05/09/22 19:46:14
-P_5_SCASB_REPNZ_.ASM					     Symbols 2 - 1
+				END main_7
+Microsoft (R) Macro Assembler Version 14.30.30709.0	    05/11/22 19:54:48
+P_7_LODSB_.asm						     Symbols 2 - 1
 
 
 
@@ -162,7 +152,7 @@ Segments and Groups:
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
 _DATA  . . . . . . . . . . . . .	32 Bit	 00000007 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 00000035 Para	  Public  'CODE'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000002D Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -269,8 +259,7 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main_5 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000035 Public STDCALL
-  REPITE . . . . . . . . . . . .	L Near	 00000000 _TEXT	
+main_7 . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000002D Public STDCALL
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -492,7 +481,7 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-cadena1_5  . . . . . . . . . . .	Byte	 00000000 _DATA	
+cadena1_7  . . . . . . . . . . .	Byte	 00000000 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
